@@ -29,3 +29,20 @@ function insertData(data) {
         .then(text => console.log(text))
         .catch(error => console.error('Error:', error));
 }
+
+function deleteItem(button) {
+    var li = button.parentNode;
+    var itemName = li.firstChild.textContent;
+    fetch('http://localhost:8081/api/your-endpoint/' + itemName, {
+        method: 'DELETE',
+    })
+        .then(response => {
+            if (response.ok) {
+                li.remove();
+                console.log("deleted ");
+            } else {
+                console.error('gimpeeer sraka cie robila');
+            }
+        })
+        .catch(error => console.error('Error:', error));
+}
