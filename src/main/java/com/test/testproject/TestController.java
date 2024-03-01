@@ -1,10 +1,7 @@
 package com.test.testproject;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+//aby sie nie pierdolic -> mozesz pozniej zmienic
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,4 +24,11 @@ public class TestController {
         data.add("Item 3");
         return data;
     }
+
+    @DeleteMapping("/api/your-endpoint/{item}")
+    public String deleteItem(@PathVariable String item) {
+        System.out.println("Deleted item: " + item);
+        return "Item deleted: " + item;
+    }
+
 }
