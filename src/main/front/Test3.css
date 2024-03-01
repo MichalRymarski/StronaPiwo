@@ -1,4 +1,3 @@
-
 h1 {
     color: #333;
 }
@@ -32,7 +31,38 @@ button {
     cursor: pointer;
 }
 body {
-    background-image: url('ja.gif');
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    /* znajdz w lepszej rozdzialce */
+    background-image: url('/resources/sraka.jpg');
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* z index jest po to aby okreslac ktore elementy sa na "wierzchu" */
+    z-index: -1;
+}
+
+
+/* twoj gif mozesz nim manewrowac i sie bawic */
+.gif-container {
+    position: fixed;
+    top: calc(68% - 400px);
+    left: calc(84% - 400px);
+    width: 620px;
+    height: 620px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+/* POTRZEBNE ABY BYLO KOLO */
+.gif {
+    width: 100%;
+    height: 100%;
 }
