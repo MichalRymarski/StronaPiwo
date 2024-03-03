@@ -1,21 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Piwoooooo</title>
-    <link rel="stylesheet" type="text/css" href="Test3.css">
+    <title>Test Page</title>
 </head>
 <body>
-    <div class="gif-container">
-        <img src="ja.gif" alt="GIF" class="gif">
-    </div>
-    <div class="buttons">
-        <h1>My Data</h1>
-        <ul id="itemList"></ul>
-        <script src="Test.js"></script>
-        <button id="fetchButton" onclick="fetchData()">Fetch Data</button>
-        <button onclick="insertData('Some data')">Insert Data</button>
-    </div>
+<form id="myForm">
+    <label for="name">Name:</label><br>
+    <input type="text" id="name" name="name"><br>
+    <label for="password">Password:</label><br>
+    <input type="password" id="password" name="password"><br>
+    <input type="submit" value="Submit">
+</form>
+<div id="response"></div>
+
+<script src="Test.js"></script>
 </body>
 </html>

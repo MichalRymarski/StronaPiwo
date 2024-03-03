@@ -1,48 +1,21 @@
-function fetchData() {
-    fetch('http://localhost:8081/api/your-endpoint')
-        .then(response => response.json())
-        .then(data => {
-            var ul = document.getElementById('itemList');
-            ul.innerHTML = ''; // clear the list before adding new items
-            data.forEach(item => {
-                var li = document.createElement('li');
-                li.appendChild(document.createTextNode(item)); // replace 'item' with the actual property you want to display
-                var deleteBtn = document.createElement('button');
-                deleteBtn.appendChild(document.createTextNode('Delete'));
-                deleteBtn.setAttribute('onclick', 'deleteItem(this)');
-                li.appendChild(deleteBtn);
-                ul.appendChild(li);
-            });
-        })
-        .catch(error => console.error('Error:', error));
-}
+document.getElementById('myForm').addEventListener('submit', function(e) {
+    e.preventDefault();
 
-function insertData(data) {
-    fetch('http://localhost:8081/api/your-endpoint', {
+    var name = document.getElementById('name').value;
+    var password = document.getElementById('password').value;
+
+    fetch('http://localhost:8082/users', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify({name: name, password: password}),
     })
         .then(response => response.text())
-        .then(text => console.log(text))
-        .catch(error => console.error('Error:', error));
-}
-
-function deleteItem(button) {
-    var li = button.parentNode;
-    var itemName = li.firstChild.textContent;
-    fetch('http://localhost:8081/api/your-endpoint/' + itemName, {
-        method: 'DELETE',
-    })
-        .then(response => {
-            if (response.ok) {
-                li.remove();
-                console.log("deleted ");
-            } else {
-                console.error('gimpeeer sraka cie robila');
-            }
+        .then(data => {
+            document.getElementById('response').innerText = data;
         })
-        .catch(error => console.error('Error:', error));
-}
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+});
