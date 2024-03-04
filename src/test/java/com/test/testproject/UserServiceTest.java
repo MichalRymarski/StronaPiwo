@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -32,5 +34,16 @@ class UserServiceTest {
         assertNotNull(retrievedUser);
         assertEquals(user.getNickName(), retrievedUser.getNickName());
         assertEquals(user.getPasswordHash(), retrievedUser.getPasswordHash());
+    }
+
+    @Test
+    void getUserByNickNameAndPassword() {
+        User user = new User();
+        user.setNickName("Michas");
+        user.setPasswordHash("Srichas");
+        Optional<User> retrivedUser = userRepository.findByNickNameAndPasswordHash(user.getNickName(), user.getPasswordHash());
+        assertNotNull(retrivedUser.get());
+        assertEquals(user.getNickName(), retrivedUser.get().getNickName());
+        assertEquals(user.getNickName(), retrivedUser.get().getNickName());
     }
 }

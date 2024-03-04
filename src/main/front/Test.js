@@ -1,21 +1,30 @@
-document.getElementById('myForm').addEventListener('submit', function(e) {
-    e.preventDefault();
+const username = 'admin';
+const password = 'admin';
 
-    var name = document.getElementById('name').value;
-    var password = document.getElementById('password').value;
+fetch('http://localhost:8082/beers/example', {
+    method: 'GET',
+    headers: {
+        'Authorization': 'Basic ' + btoa(username + ":" + password)
+    }
+})
+    .then(response => response.json())
+    .then(data => {
+        // Get the div element
+        var div = document.getElementById('beerData');
 
-    fetch('http://localhost:8082/users', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({name: name, password: password}),
+        // Create an img element for the beer image
+        var img = document.createElement('img');
+        img.src = data.url;
+        div.appendChild(img);
+
+        // Create a p element for the beer description
+        var p = document.createElement('p');
+        p.textContent = data.description;
+        div.appendChild(p);
+
+        // Create a p element for the beer proposedBy
+        var p2 = document.createElement('p');
+        p2.textContent = "Proposed by: " + data.proposedBy;
+        div.appendChild(p2);
     })
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('response').innerText = data;
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
-});
+    .catch(error => console.error('Error:', error));

@@ -27,14 +27,27 @@ public class UserController {
 
 
     @GetMapping(value = "/users")
-    public List<UserDTO> getSampleUser() {
+    public List<UserDTO> getAllUsers() {
         User user = new User();
-        user.setNickName("buba");
-        user.setPasswordHash("Michas");
+        user.setNickName("Michas");
+        user.setPasswordHash("Srichas");
         user.setIsAdmin(false);
         UserDTO newUser = userService.addUser(userMapper.toDTO(user));
         userService.addUser(newUser);
         return userService.getAllUsers();
     }
+
+    @GetMapping(value = "/clear")
+    public void deleteUsers(){
+        userService.clearDatabase();
+    }
+
+    @GetMapping(value = "/users/{nickName}")  //ZNAJDUJE DOBRZE ALE MUSISZ MIEC JEDNEGO CHLOPKA Z TAKIM IMIENIEM
+    public UserDTO getSampleUser(@PathVariable String nickName,@RequestBody String password) { // W USER JEST UNIQUE NAME WIEC TO POZNIEJ NIE BEDZIE PROBLEMEM
+        UserDTO user = userService.getUserByNickNameAndPassword(nickName,password);
+        return user;
+    }
+
+
 
 }

@@ -17,7 +17,9 @@ public class UserService {
 
     //TODO : CRUD od razu gdy cos bedziemy z niego potrzebowali
 
-
+   public void clearDatabase(){
+      userRepository.deleteAll();
+   }
    public List<UserDTO> getAllUsers() {
       List<User> users = userRepository.findAll();
       if (users.isEmpty()){
