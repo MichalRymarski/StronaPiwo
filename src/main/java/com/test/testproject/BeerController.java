@@ -16,7 +16,7 @@ public class BeerController {
     public Beer getSampleBeer(){
         Beer beer  = new Beer();
         beer.setUrl("https://lh3.googleusercontent.com/proxy/W4796kkGOCR407yQ7AORs0X470nPaR3UmWV2UQYfOvf7ZZRcO42Ruo2KA09GyyG1IwrgsJEsssIX2rJ-GeRHnWBAqdw8CBfkMRUQe9-IvxL3osg922mydgPhacwFCcmg17WiMYqNP90hxHGzvd-ub0c623thsHWSMRIYW12hqIhltw");
-        beer.setDescription("pyszna perła chmiel");
+        beer.setDescription("pyszna perła chmielowa");
         beer.setProposedBy("Michas");
         return beer;
     }

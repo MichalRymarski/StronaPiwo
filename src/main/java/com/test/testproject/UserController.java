@@ -42,7 +42,7 @@ public class UserController {
         userService.clearDatabase();
     }
 
-    @GetMapping(value = "/users/{nickName}")  //ZNAJDUJE DOBRZE ALE MUSISZ MIEC JEDNEGO CHLOPKA Z TAKIM IMIENIEM
+    @GetMapping(value = "/users/{nickName}")  //ZNAJDUJE DOBRZE ALE MUSISZ MIEC JEDNEGO CHLOPKA Z TAKIM IMIENIEM (feature)
     public UserDTO getSampleUser(@PathVariable String nickName,@RequestBody String password) { // W USER JEST UNIQUE NAME WIEC TO POZNIEJ NIE BEDZIE PROBLEMEM
         UserDTO user = userService.getUserByNickNameAndPassword(nickName,password);
         return user;

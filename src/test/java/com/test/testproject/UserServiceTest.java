@@ -10,6 +10,8 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
 
+// wkurwial mnie wykrzyknik a nie chce mi sie dodawac linijek kodu
+@SuppressWarnings("OptionalGetWithoutIsPresent")
 @SpringBootTest
 @ActiveProfiles("test")
 class UserServiceTest {
@@ -19,6 +21,7 @@ class UserServiceTest {
 
     @Test
     public void saveUser_NewUser_UserIsSaved() {
+
         // Create a new user
         User user = new User();
         user.setNickName("Michas");
@@ -38,9 +41,11 @@ class UserServiceTest {
 
     @Test
     void getUserByNickNameAndPassword() {
+
         User user = new User();
         user.setNickName("Michas");
         user.setPasswordHash("Srichas");
+
         Optional<User> retrivedUser = userRepository.findByNickNameAndPasswordHash(user.getNickName(), user.getPasswordHash());
         assertNotNull(retrivedUser.get());
         assertEquals(user.getNickName(), retrivedUser.get().getNickName());
