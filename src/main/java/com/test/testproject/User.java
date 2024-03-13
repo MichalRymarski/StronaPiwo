@@ -26,6 +26,6 @@ public class User {
     @Column(name = "password_hash")
     private String passwordHash;
 
-    @Column(name = "is_admin")
-    private Boolean isAdmin;
+    @Column(name = "role")
+    private String role;
 }

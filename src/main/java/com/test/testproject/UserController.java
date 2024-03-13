@@ -10,30 +10,15 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:63342") //taki jest localhost dla webu default
 @RestController
 @RequiredArgsConstructor
+@RequestMapping(value = "/users")
 public class UserController {
 
     private final UserService userService;
     private final UserMapper userMapper = UserMapper.INSTACE;
 
 
-    @PostMapping(value = "/users")
-    public UserDTO addSampleUser() {
-        User user = new User();
-        user.setNickName("buba");
-        user.setPasswordHash("Michas");
-        UserDTO newUser = userService.addUser(userMapper.toDTO(user));
-        return newUser;
-    }
-
-
-    @GetMapping(value = "/users")
+    @GetMapping(value = "/all")
     public List<UserDTO> getAllUsers() {
-        User user = new User();
-        user.setNickName("Michas");
-        user.setPasswordHash("Srichas");
-        user.setIsAdmin(false);
-        UserDTO newUser = userService.addUser(userMapper.toDTO(user));
-        userService.addUser(newUser);
         return userService.getAllUsers();
     }
 
@@ -42,7 +27,7 @@ public class UserController {
         userService.clearDatabase();
     }
 
-    @GetMapping(value = "/users/{nickName}")  //ZNAJDUJE DOBRZE ALE MUSISZ MIEC JEDNEGO CHLOPKA Z TAKIM IMIENIEM
+    @GetMapping(value = "/{nickName}")  //ZNAJDUJE DOBRZE ALE MUSISZ MIEC JEDNEGO CHLOPKA Z TAKIM IMIENIEM
     public UserDTO getSampleUser(@PathVariable String nickName,@RequestBody String password) { // W USER JEST UNIQUE NAME WIEC TO POZNIEJ NIE BEDZIE PROBLEMEM
         UserDTO user = userService.getUserByNickNameAndPassword(nickName,password);
         return user;

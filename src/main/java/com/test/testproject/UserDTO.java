@@ -14,5 +14,5 @@ public class UserDTO implements Serializable { // to wszystko lombok zrobil GG o
     String nickName;
     String email;
     String passwordHash;
-    Boolean isAdmin;
+    String role;
 }

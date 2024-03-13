@@ -43,7 +43,13 @@ public class UserService {
       }
       throw new NoSuchElementException("no user found");
    }
-
+   public UserDTO getUserByNickName(final String nickName){
+     Optional <User> user = userRepository.findByNickName(nickName);
+     if (user.isPresent()){
+        return userMapper.toDTO(user.get());
+     }
+     throw new NoSuchElementException("No user by this nickName was found");
+   }
    public UserDTO getUserByNickNameAndPassword(final String nickName,final String hashPassword){
       Optional<User> user = userRepository.findByNickNameAndPasswordHash(nickName,hashPassword);
       if (user.isPresent()){

@@ -17,4 +17,7 @@ public class BeerService {
     public Beer addBeer(Beer beer){
         return beerRepository.save(beer);
     }
+    public List<Beer> getBeerByProposed(String nickName){
+        return beerRepository.findByProposedBy(nickName);
+    }
 }
