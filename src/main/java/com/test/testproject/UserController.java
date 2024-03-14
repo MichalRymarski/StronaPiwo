@@ -17,6 +17,15 @@ public class UserController {
     private final UserMapper userMapper = UserMapper.INSTACE;
 
 
+    @GetMapping(value = "/sample")
+    public UserDTO addSampleUser(){
+        User user = new User();
+        user.setNickName("Nichas");
+        user.setPasswordHash("$2a$12$wsmF25q8MOGDLOYA3/WO4e620FM.n/09/ROS0vhISVQbzzya1fOgK");
+        user.setRole("ADMIN");
+        userService.addUser(userMapper.toDTO(user));
+        return userMapper.toDTO(user);
+    }
     @GetMapping(value = "/all")
     public List<UserDTO> getAllUsers() {
         return userService.getAllUsers();

@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -17,7 +18,7 @@ public class User {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "nick_name",unique = true) //pola w bazie z underscorem i małymi, pola w javie camelCasem
+    @Column(name = "nick_name", unique = true) //pola w bazie z underscorem i małymi, pola w javie camelCasem
     private String nickName;
 
     @Column(name = "email")
@@ -26,6 +27,11 @@ public class User {
     @Column(name = "password_hash")
     private String passwordHash;
 
-    @Column(name = "role")
+    @Column(name = "role",nullable = false)
     private String role;
+
+    @PrePersist
+    private void setDefaultRole(){
+        role = "USER";
+    }
 }

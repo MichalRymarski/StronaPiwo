@@ -17,7 +17,7 @@ public class MyUserDetailsService implements UserDetailsService {
         return org.springframework.security.core.userdetails.User
             .withUsername(userDTO.getNickName())
             .password(userDTO.getPasswordHash())
-            .roles(userDTO.getRole())
+            .roles((userDTO.getRole()))
             .build();
     }
 }

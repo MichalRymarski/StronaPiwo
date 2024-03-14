@@ -11,8 +11,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("register")
 public class RegistrationController {
     private final UserService userService;
+    private final PasswordEncoderConfig passwordEncoder;
     @PostMapping
-    public UserDTO registerUser(@RequestBody String nickName, @RequestBody String unhashedPassword){
-        return null; //TODO
+    public UserDTO registerUser(@RequestBody RegistrationDTO request){
+        User user = new User();
+        user.setNickName(request.getNickName());
+        String hashedPassword = passwordEncoder.passwordEncoder().encode(request.getUnhashedPassword());
+        user.setPasswordHash(hashedPassword);
+
+        return userService.registerUser(user);
     }
 }

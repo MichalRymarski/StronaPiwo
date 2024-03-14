@@ -9,14 +9,16 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service //specjalny @Component ktory przywolujesz se autowired w testach, NIE UZYWAJ  AUTOWIRED W KODZIE
-//Serivce z automatu tworzy instancje wstrzykujac konstrutor gdy go potrzebujesz OP OP
+//Serivce z automatu tworzy instancje klasy wstrzykujac konstrutor gdy go potrzebujesz OP OP
 @RequiredArgsConstructor // wszystkie pola final maja wygenerowany dla siebie konstruktor od razu
 public class UserService {
    private  final UserRepository userRepository;
    private final UserMapper userMapper = UserMapper.INSTACE;
 
-    //TODO : CRUD od razu gdy cos bedziemy z niego potrzebowali
-
+   public UserDTO registerUser(User user){
+      userRepository.save(user);
+      return userMapper.toDTO(user);
+   }
    public void clearDatabase(){
       userRepository.deleteAll();
    }
@@ -30,10 +32,9 @@ public class UserService {
           .collect(Collectors.toList());
    }
 
-   public UserDTO addUser(UserDTO userDTO){
-      User user = userMapper.toEntity(userDTO);
-      User savedUser = userRepository.save(user);
-      return userMapper.toDTO(savedUser);
+   public void addUser(UserDTO userDTO){
+      User user = userMapper.toEntity(userDTO);//savedUser tutaj ma inne persistence niz user bo to jest z Hibernate wtedy zrobione
+      User savedUser = userRepository.save(user); //zmiany na savedUserze beda mialy wplyw na zmiane w bazie, ale tutaj to nic nie zmienia akurat
    }
 
    public UserDTO getUserById(final Long id)  {
